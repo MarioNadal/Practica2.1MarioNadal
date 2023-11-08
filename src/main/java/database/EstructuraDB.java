@@ -18,6 +18,7 @@ public class EstructuraDB {
 
     public static void crearTablas(){
         //al utilizar el try with resources con un objeto closeable, este se cerrará en cualquier caso.
+        //TODO NO ENTRA EN ESTA CONEXION PONE QUE NO SE PUEDE CONECTAR A LA BASE DE DATOS
         try(Connection miCon = ConexionBD.conectar()) {
             //sentencias SQL para crear tabla asignaturas
             String tablaAsig = "CREATE TABLE C1_ASIGNATURAS (\n" +
