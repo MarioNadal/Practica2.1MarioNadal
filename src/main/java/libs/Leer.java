@@ -101,16 +101,16 @@ public class Leer {
             try {
                 mostrarEnPantalla(texto);
                 datoT = dataIn.readLine();
-                dato = new SimpleDateFormat("dd-MM-yyyy").parse(datoT);
+                dato = new SimpleDateFormat("yyyy-MM-dd").parse(datoT);
                 error = false;
             } catch (IOException e) {
                 mostrarEnPantalla("Vuelve a introducir el dato, por favor. ");
                 error = true;
             } catch (NumberFormatException e) {
-                mostrarEnPantalla("El dato introducido no es una fecha válida: dd-MM-yyyy");
+                mostrarEnPantalla("El dato introducido no es una fecha válida: yyyy-MM-dd");
                 error = true;
             } catch (ParseException e) {
-                mostrarEnPantalla("El dato introducido no es una fecha válida: dd-MM-yyyy");
+                mostrarEnPantalla("El dato introducido no es una fecha válida: yyyy-MM-dd");
                 error = true;
             }
         }
