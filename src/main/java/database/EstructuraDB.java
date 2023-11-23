@@ -18,21 +18,18 @@ public class EstructuraDB {
 
     public static void crearTablas(){
         //al utilizar el try with resources con un objeto closeable, este se cerrará en cualquier caso.
-        //TODO NO ENTRA EN ESTA CONEXION PONE QUE NO SE PUEDE CONECTAR A LA BASE DE DATOS
         try(Connection miCon = ConexionBD.conectar()) {
             //sentencias SQL para crear tabla asignaturas
             String tablaAsig = "CREATE TABLE C1_ASIGNATURAS (\n" +
-                    " COD_ASIG CHAR(6) NOT NULL PRIMARY KEY" +
-                    " NOMBRE_ASI VARCHAR(30)" +
-                    ");";
+                    "    COD_ASIG CHAR(6) NOT NULL PRIMARY KEY,\n" +
+                    "    NOMBRE_ASI VARCHAR(30));";
             //sentencias SQL para añadir los valores de varios departamentos a la tabla
             List<String> addAsig = Arrays.asList("INSERT INTO C1_ASIGNATURAS VALUES ('IF0001','DAHC')",
-                    "INSERT INTO C1_ASIGNATURAS VALUES ('IF0001','DAHC')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('IF0002','RAL')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('IF0003','IMSI')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('IF0004','DPEG')",
-                    "INSERT INTO C1_ASIGNATURAS VALUES ('IF0005','PLE')",
-                    "INSERT INTO C1_ASIGNATURAS VALUES ('IF0005','FPE')",
+                    "INSERT INTO C1_ASIGNATURAS VALUES ('IF0006','PLE')",
+                    "INSERT INTO C1_ASIGNATURAS VALUES ('IF0007','FPE')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('LG0001','Lengua 1 ESO')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('LG0002','Lengua 2 ESO')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('LG0003','Lengua 3 ESO')",
@@ -43,27 +40,23 @@ public class EstructuraDB {
                     "INSERT INTO C1_ASIGNATURAS VALUES ('MT0001','Matemáticas 1 BAC')",
                     "INSERT INTO C1_ASIGNATURAS VALUES ('MT0002','Matemáticas 2 BAC')"
                     );
-            String tablaCentros = "CREATE TABLE C1_CENTROS\n" +
-                    "(\n" +
-                    "\tCOD_CENTRO NUMERIC(4) NOT NULL PRIMARY KEY ,\n" +
-                    "\tNOM_CENTRO VARCHAR(20),\n" +
-                    "\tDIRECTOR NUMERIC(4),\n" +
-                    "\tDIRECCION VARCHAR(25),\n" +
-                    "\tLOCALIDAD VARCHAR(20),\n" +
-                    "\tPROVINCIA VARCHAR(20)\n" +
-                    "\n" +
-                    ") ;";
+            String tablaCentros = "CREATE TABLE C1_CENTROS(\n" +
+                    "    COD_CENTRO NUMERIC(4) NOT NULL PRIMARY KEY ,\n" +
+                    "    NOM_CENTRO VARCHAR(20),\n" +
+                    "    DIRECTOR NUMERIC(4),\n" +
+                    "    DIRECCION VARCHAR(25),\n" +
+                    "    LOCALIDAD VARCHAR(20),\n" +
+                    "    PROVINCIA VARCHAR(20)\n" +
+                    "    ) ;";
             List<String> addCentros = Arrays.asList("INSERT INTO C1_CENTROS VALUES (1000,'IES El Quijote', 1000, 'Avda. Los Molinos 25', 'GUADALAJARA', 'GUADALAJARA')",
                     "INSERT INTO C1_CENTROS VALUES (1015,'CP Los Danzantes', 1010,'C/Las Musas s/n','PASTRANA', 'GUADALAJARA')",
                     "INSERT INTO C1_CENTROS VALUES (1022, 'IES Planeta Tierra',2000,'C/Mina 45', 'AZUQUECA', 'GUADALAJARA')",
                     "INSERT INTO C1_CENTROS VALUES (1045, 'CP Manuel Hidalgo', NULL,'C/Granada 5', 'GUADALAJARA', 'GUADALAJARA')",
                     "INSERT INTO C1_CENTROS VALUES (1050, 'IES Antoñete', NULL,'C/Los Toreros 21', 'SIGUENZA', 'GUADALAJARA')"
                     );
-            String tablaEspecialidad = "CREATE TABLE C1_ESPECIALIDAD\n" +
-                    "(\n" +
-                    "\tESPECIALIDAD CHAR(2) NOT NULL PRIMARY KEY,\n" +
-                    "\tNOMBRE_ESPE VARCHAR(25)\n" +
-                    ") ;";
+            String tablaEspecialidad = "CREATE TABLE C1_ESPECIALIDAD (\n" +
+                    "    ESPECIALIDAD CHAR(2) NOT NULL PRIMARY KEY,\n" +
+                    "    NOMBRE_ESPE VARCHAR(25)) ;";
             List<String> addEspecialidad = Arrays.asList("INSERT INTO C1_ESPECIALIDAD VALUES ('IF','Informática')",
                     "INSERT INTO C1_ESPECIALIDAD VALUES ('IN','Inglés')",
                     "INSERT INTO C1_ESPECIALIDAD VALUES ('FQ','Física y Química')",
@@ -73,16 +66,14 @@ public class EstructuraDB {
                     "INSERT INTO C1_ESPECIALIDAD VALUES ('DB','Dibujo')",
                     "INSERT INTO C1_ESPECIALIDAD VALUES ('MT','Matemáticas')"
             );
-            String tablaProfesores = "CREATE TABLE C1_PROFESORES\n" +
-                    "(\n" +
-                    "\tCOD_PROF NUMERIC(4) NOT NULL PRIMARY KEY, \n" +
-                    "\tNOMBRE_APE VARCHAR(30),\n" +
-                    "\tESPECIALIDAD CHAR(2) REFERENCES C1_ESPECIALIDAD(ESPECIALIDAD ),\n" +
-                    "\tJEFE_DEP NUMERIC(4),\n" +
-                    "\tFECHA_NAC DATE,\n" +
-                    "\tSEXO CHAR(1),\n" +
-                    "\tCOD_CENTRO NUMERIC(4) NOT NULL REFERENCES C1_CENTROS (COD_CENTRO)\n" +
-                    ");";
+            String tablaProfesores = "CREATE TABLE C1_PROFESORES (\n" +
+                    "    COD_PROF NUMERIC(4) NOT NULL PRIMARY KEY,\n" +
+                    "    NOMBRE_APE VARCHAR(30),\n" +
+                    "    ESPECIALIDAD CHAR(2) REFERENCES C1_ESPECIALIDAD(ESPECIALIDAD ),\n" +
+                    "    JEFE_DEP NUMERIC(4),\n" +
+                    "    FECHA_NAC DATE,\n" +
+                    "    SEXO CHAR(1),\n" +
+                    "    COD_CENTRO NUMERIC(4) NOT NULL REFERENCES C1_CENTROS (COD_CENTRO));";
             List<String> addProfesores = Arrays.asList("INSERT INTO C1_PROFESORES VALUES (1000,'Martínez Salas, Fernando', 'IF', 1001, '1961-09-07', 'H', 1000)",
             "INSERT INTO C1_PROFESORES VALUES (1001,'Bueno Zarco, Elisa', 'IF',NULL, '1960-02-17', 'M', 1000)",
             "INSERT INTO C1_PROFESORES VALUES (2002,'Rivera Silvestre, Ana','DB',3000, '1950-10-10', 'M',1000)",
@@ -94,12 +85,10 @@ public class EstructuraDB {
             "INSERT INTO C1_PROFESORES VALUES (2003,'Segura Molina, Irene','LG',NULL, '1963-07-08', 'M',1022 )",
             "INSERT INTO C1_PROFESORES VALUES (1045,'Serrano Laguía, María','IF',NULL,'1976-01-02', 'M', 1022)"
             );
-            String tablaAsigProfesores = "CREATE TABLE C1_ASIGPROF\n" +
-                    "(\n" +
-                    "\tCOD_ASIG CHAR(6) NOT NULL REFERENCES C1_ASIGNATURAS (COD_ASIG),\n" +
-                    "\tCOD_PROF NUMERIC(4) NOT NULL REFERENCES C1_PROFESORES (COD_PROF),\n" +
-                    "    PRIMARY KEY (COD_ASIG,COD_PROF)\n" +
-                    ") ;";
+            String tablaAsigProfesores = "CREATE TABLE C1_ASIGPROF(\n" +
+                    "    COD_ASIG CHAR(6) NOT NULL REFERENCES C1_ASIGNATURAS (COD_ASIG),\n" +
+                    "    COD_PROF NUMERIC(4) NOT NULL REFERENCES C1_PROFESORES (COD_PROF),\n" +
+                    "    PRIMARY KEY (COD_ASIG,COD_PROF)) ;";
             List<String> addAsigProfesores = Arrays.asList("INSERT INTO C1_ASIGPROF VALUES ('IF0002',1001);\n" +
                     "INSERT INTO C1_ASIGPROF VALUES ('IF0003',1001)",
                     "INSERT INTO C1_ASIGPROF VALUES ('IF0001',1000)",
@@ -151,7 +140,7 @@ public class EstructuraDB {
             System.out.println("La sentencia SQL no cumple con los requisitos de integridad " +
                     "de la base de datos" + e.getMessage());
         }catch (SQLException e) {
-            System.out.println("No se puede conectar a la base de datos");
+            System.out.println("No se puede conectar a la base de datos" + e.getMessage());
         }
     }
 

@@ -1,9 +1,6 @@
 package org.example;
 
-import database.BorrarBD;
-import database.ConexionBD;
-import database.EstructuraDB;
-import database.ListarProfesores;
+import database.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -26,6 +23,7 @@ public class Main {
                 }
                 case 2 -> BorrarBD.borrar();
                 case 3 -> ListarProfesores.listar();
+                case 4 -> InsertarProfesor.insertar();
                 case 0 -> salir = true;
                 default -> System.out.println("Opción incorrecta");
             }
