@@ -62,18 +62,20 @@ public class InsertarProfesor {
             pstmt1.setString(4, fechaNacimientoIntroducido.toString());
             pstmt1.setString(5,sexoIntroducido);
             pstmt1.setInt(6,codigoCentroIntroducido);
+            //EJECUTO EL PREPARED STATEMENT Y AÑADO EL PROFESOR
+            pstmt1.execute();
             System.out.println("--------------------------------------------------------------------------------------");
             System.out.println("Profesor introducido correctamente");
             System.out.println("--------------------------------------------------------------------------------------");
             //Comprobación de que se ha añaido el nuevo profesor
-            ResultSet rs5 = stmt.executeQuery("SELECT NOMBRE_APE FROM C1_PROFESORES");
-            while(rs5.next()){
-                System.out.println(rs5.getString("NOMBRE_APE"));
+            ResultSet rs6 = stmt.executeQuery("SELECT NOMBRE_APE FROM C1_PROFESORES");
+            while(rs6.next()){
+                System.out.println(rs6.getString("NOMBRE_APE"));
             }
             System.out.println("--------------------------------------------------------------------------------------");
 
         } catch (SQLException ex) {
-            System.out.println("Error en la conexión de la base de datos al listar profesores");
+            System.out.println("Error en la conexión de la base de datos al listar profesores " + ex.getMessage());
         }
     }
 }
