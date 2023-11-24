@@ -40,14 +40,17 @@ public class InsertarProfesor {
                     System.out.println(rs3.getInt("COD_CENTRO"));
                 }
                 //Recogo el código del centro que quiere el usuario para el nuevo profesor
+                System.out.println("--------------------------------------------------------------------------------------");
                 codigoCentroIntroducido = Leer.introduceEntero("Introduce el código del centro del nuevo profesor");
-            ResultSet rs4 = stmt.executeQuery("SELECT COD_CENTRO FROM C1_CENTROS");
+                System.out.println("--------------------------------------------------------------------------------------");
+                ResultSet rs4 = stmt.executeQuery("SELECT COD_CENTRO FROM C1_CENTROS");
                 while(rs4.next()){
                     if(rs4.getInt("COD_CENTRO") == codigoCentroIntroducido){
                         validarCodCentro = true;
                     }
                 }
             }
+            System.out.println("--------------------------------------------------------------------------------------");
             //Recogo los datos que faltan para poder crear al profesor
             codProfesorIntroducido = Leer.introduceEntero("Introduce el código del profesor");
             apellidosNombreIntroducido = Leer.introduceString("Introduce los apellidos, una coma y el nombre del profesor");
@@ -75,7 +78,7 @@ public class InsertarProfesor {
             System.out.println("--------------------------------------------------------------------------------------");
 
         } catch (SQLException ex) {
-            System.out.println("Error en la conexión de la base de datos al listar profesores " + ex.getMessage());
+            System.out.println("Error en la conexión de la base de datos al listar profesores");
         }
     }
 }
