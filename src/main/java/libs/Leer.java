@@ -101,7 +101,7 @@ public class Leer {
             try {
                 mostrarEnPantalla(texto);
                 datoT = dataIn.readLine();
-                dato = new SimpleDateFormat("yyyy-MM-dd").parse(datoT);
+                dato = new SimpleDateFormat("yyyy-mm-dd").parse(datoT);
                 error = false;
             } catch (IOException e) {
                 mostrarEnPantalla("Vuelve a introducir el dato, por favor. ");

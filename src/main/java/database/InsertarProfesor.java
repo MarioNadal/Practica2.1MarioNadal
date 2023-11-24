@@ -14,8 +14,8 @@ public class InsertarProfesor {
         boolean validarEspecialidad = false, validarCodCentro = false;
         try (Connection miCon = ConexionBD.conectar()) {
             Statement stmt = miCon.createStatement();
-            ResultSet rs1 = stmt.executeQuery("SELECT ESPECIALIDAD FROM C1_ESPECIALIDAD");
             while(!validarEspecialidad){
+                ResultSet rs1 = stmt.executeQuery("SELECT ESPECIALIDAD FROM C1_ESPECIALIDAD");
                 System.out.println("ESPECIALIDADES: ");
                 System.out.println("--------------------------------------------------------------------------------------");
                 //Saco por pantalla todas las especialidades que hay
@@ -26,13 +26,16 @@ public class InsertarProfesor {
                 //Recogo la especialidad que quiere el usuario para el nuevo profesor
                 especialidadIntroducida = Leer.introduceString("Introduce la especialidad del nuevo profesor: ");
                 while(rs2.next()){
-                    if(rs1.getString("ESPECIALIDAD").equals(especialidadIntroducida)){
+                    if(rs1.getString("ESPECIALIDAD").equals(especialidadIntroducida)) {
                         validarEspecialidad = true;
                     }
                 }
+                if(!validarEspecialidad){
+                    System.out.println("Introduce una especialidad válida");
+                }
             }
-            ResultSet rs3 = stmt.executeQuery("SELECT COD_CENTRO FROM C1_CENTROS");
             while(!validarCodCentro){
+                ResultSet rs3 = stmt.executeQuery("SELECT COD_CENTRO FROM C1_CENTROS");
                 System.out.println("CÓDIGOS CENTROS");
                 System.out.println("--------------------------------------------------------------------------------------");
                 //Saco por la pantalla todos los códigos de los centros que hay
@@ -42,12 +45,14 @@ public class InsertarProfesor {
                 //Recogo el código del centro que quiere el usuario para el nuevo profesor
                 System.out.println("--------------------------------------------------------------------------------------");
                 codigoCentroIntroducido = Leer.introduceEntero("Introduce el código del centro del nuevo profesor");
-                System.out.println("--------------------------------------------------------------------------------------");
                 ResultSet rs4 = stmt.executeQuery("SELECT COD_CENTRO FROM C1_CENTROS");
                 while(rs4.next()){
                     if(rs4.getInt("COD_CENTRO") == codigoCentroIntroducido){
                         validarCodCentro = true;
                     }
+                }
+                if(!validarCodCentro){
+                    System.out.println("Introduce un código de centro válido");
                 }
             }
             System.out.println("--------------------------------------------------------------------------------------");
@@ -71,12 +76,11 @@ public class InsertarProfesor {
             System.out.println("Profesor introducido correctamente");
             System.out.println("--------------------------------------------------------------------------------------");
             //Comprobación de que se ha añaido el nuevo profesor
-            ResultSet rs6 = stmt.executeQuery("SELECT NOMBRE_APE FROM C1_PROFESORES");
+            /*ResultSet rs6 = stmt.executeQuery("SELECT NOMBRE_APE FROM C1_PROFESORES");
             while(rs6.next()){
                 System.out.println(rs6.getString("NOMBRE_APE"));
             }
-            System.out.println("--------------------------------------------------------------------------------------");
-
+            System.out.println("--------------------------------------------------------------------------------------");*/
         } catch (SQLException ex) {
             System.out.println("Error en la conexión de la base de datos al listar profesores");
         }
