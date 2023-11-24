@@ -53,8 +53,8 @@ public class InsertarProfesor {
             System.out.println("--------------------------------------------------------------------------------------");
             //Recogo los datos que faltan para poder crear al profesor
             codProfesorIntroducido = Leer.introduceEntero("Introduce el código del profesor");
-            apellidosNombreIntroducido = Leer.introduceString("Introduce los apellidos, una coma y el nombre del profesor");
-            fechaNacimientoIntroducido = Leer.introduceDate("Introduce la fecha de nacimiento del usuario");
+            apellidosNombreIntroducido = Leer.introduceString("Introduce los apellidos, una coma y el nombre del profesor (Apellido1 Apellido2, Nombre)");
+            fechaNacimientoIntroducido = Leer.introduceDate("Introduce la fecha de nacimiento del usuario (Año-Mes-Día)");
             do{
                 sexoIntroducido = Leer.introduceLetra("Introduce sexo del profesor(H/M)");
             }while(!sexoIntroducido.equals("H")&&!sexoIntroducido.equals("M"));
