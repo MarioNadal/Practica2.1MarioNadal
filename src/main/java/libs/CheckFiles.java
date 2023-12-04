@@ -3,7 +3,7 @@ package libs;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-
+//CheckFiles
 public class CheckFiles {
 
     //método para saber si se puede escribir en un directorio y si no lo crea
@@ -43,7 +43,7 @@ public class CheckFiles {
     }
     //método para saber si se puede escribir un fichero
     public static boolean ficheroEscribible(Path p){
-        //Método que comprueba sis e puede escribir en un fichero y si no lo crea
+        //Método que comprueba si se puede escribir en un fichero y si no lo crea
         boolean ficheroOK = false;
         if(Files.exists(p)){
             if(Files.isWritable(p)){
